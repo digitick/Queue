@@ -1,12 +1,12 @@
 {
     "autoload": {
         "psr-4": {
-            "Digitick\\": "src"
+            "Digitick\\": "src/Digitick"
         }
     },
     "name": "digitick/queue",
     "description": "RabbitMQ message sending",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "require": {
         "php-amqplib/php-amqplib": "2.6.2"
     },
