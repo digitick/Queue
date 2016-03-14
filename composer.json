@@ -1,0 +1,19 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Digitick\\": "src"
+        }
+    },
+    "name": "digitick/queue",
+    "description": "RabbitMQ message sending",
+    "version": "0.0.1",
+    "require": {
+        "php-amqplib/php-amqplib": "2.6.2"
+    },
+    "authors": [
+        {
+            "name": "Mallory Mollo",
+            "email": "mallory.mollo@digitick.com"
+        }
+    ]
+}
