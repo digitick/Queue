@@ -5,13 +5,38 @@ namespace Digitick\Queue;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
+/**
+ * Class Queue
+ * @package Digitick\Queue
+ */
 class Queue
 {
+    /**
+     * @var AMQPStreamConnection
+     */
     private $connection;
+
+    /**
+     * @var \PhpAmqpLib\Channel\AMQPChannel
+     */
     private $channel;
+
+    /**
+     * @var array
+     */
     private $queues = [];
+
+    /**
+     * @var string
+     */
     private $exchange_name;
 
+    /**
+     * Queue constructor.
+     * @param AMQPStreamConnection $connection
+     * @param $exchange_name
+     * @param string $exchange_type
+     */
     public function __construct(AMQPStreamConnection $connection, $exchange_name, $exchange_type = 'direct')
     {
         $this->exchange_name = $exchange_name;
@@ -22,6 +47,10 @@ class Queue
         }
     }
 
+    /**
+     * @param $name
+     * @param $routing_key
+     */
     public function addQueue($name, $routing_key)
     {
         if ($this->channel && !array_key_exists($name, $this->queues)) {
@@ -31,6 +60,11 @@ class Queue
         }
     }
 
+    /**
+     * @param $msg
+     * @param null $routing_key
+     * @return bool
+     */
     public function send($msg, $routing_key = null)
     {
         if ($this->channel) {
@@ -41,5 +75,14 @@ class Queue
         }
 
         return false;
+    }
+
+    /**
+     * Close channels and the connection
+     */
+    public function closeConnection()
+    {
+        $this->channel->close();
+        $this->connection->close();
     }
 }
